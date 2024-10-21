@@ -1,0 +1,21 @@
+variables:
+  #### Versión de NPM a utilizar. Puede ser 8, 10, 12 o 14 ####
+  NPM_VERSION: "14"
+
+  #### Artifact Path, adonde se guarda el compilado ####
+  ARTIFACT_PATH: "dist"
+
+  #### Tipos de tests extra que se pueden ejecutar ####
+  IS_LINT_ENABLED: "false"
+  IS_E2E_ENABLED: "false"
+
+  FRONTEND: "false"
+
+  #### Quality sonar ####
+  TECHNOLOGY: "npm"
+  SONAR_EXCLUSION: "/src/main.ts,**/*.test.ts"
+  SONAR_TEST_INCLUSION: "**/*.test.ts"
+  SONAR_SOURCE: "src"
+  SONAR_TEST: "test"
+  SONAR_REPORT_PATH: "coverage/lcov.info"
+  EPHIMERAL_ENV: "true"

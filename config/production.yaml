@@ -1,0 +1,41 @@
+configType: "ocp"
+deploymentConfig:
+  strategy: "Rolling"
+  image:
+    imagePullPolicy: Always
+    liveness_probe: "/health"
+    readiness_probe: "/health"
+    initialDelaySeconds: 40
+    periodSeconds: 10
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 3
+    http_port: 8080
+    https_port: 8443
+
+variables:
+  configmaps:
+
+    - name: "template-config"
+      typeData: "stringData"
+      values:
+        - keyName: NODE_ENV
+          value: "production"
+        - keyName: APP_NAME
+          value: "template-nestjs"
+        - keyName: CORS_ORIGIN
+          value: "true"
+        - keyName: CORS_METHODS
+          value: '["GET", "POST", "PUT", "PATCH", "DELETE"]'
+
+service:
+  type: ClusterIP
+  port: 8080
+  target_port: 8080
+
+route:
+  oldUrlCreation: false
+  kind: Service
+  weight: 100
+
+
